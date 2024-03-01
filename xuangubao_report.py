@@ -6,17 +6,14 @@ from bs4 import BeautifulSoup
 from lxml import etree
 
 # 从测试号信息获取
-# appID = os.environ.get("APP_ID")
-appID = "wxb3f000f67321373b"
-# appSecret = os.environ.get("APP_SECRET")
-appSecret ="c3ba2420471d41456f6784d832c3c7af"
+appID = os.environ.get("APP_ID")
+appSecret = os.environ.get("APP_SECRET")
 # 收信人ID即 用户列表中的微信号
-# openId = os.environ.get("OPEN_ID")
-openId = "oSv6Ps99KTlVNL0IqOXurpEJ7LmM"
+openId = os.environ.get("OPEN_ID")
 # 天气预报模板ID
 # weather_template_id = os.environ.get("TEMPLATE_ID")
-weather_template_id = "	kYZ4sONAw5GgFEI20PQYE6b8OhGmaHh7QhuLXr3CFkA"
-xuangubao_template_id = "ShJdT2ImbRvH_iHemZdytbJcjI8oiLXx_D6MVj-q0f0"
+weather_template_id = "	"
+xuangubao_template_id = os.environ.get("TEMPLATE_ID")
 # weather_template_id = os.environ.get("TMP_ID")
 
 def get_weather(my_city):
