@@ -62,28 +62,16 @@ def get_weather(my_city):
                     return [this_city, temp, weather_typ, wind]
 
 def get_xugubao():
-    url = 'https://xuangubao.cn/jingxuan'
-
+    url = 'https://baoer-api.xuangubao.cn/api/v6/message/featured?subj_ids=5&limit=20'
     # UA 伪装
     headers = {
         'User-Agent': "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
     }
-
-    repsonse_text = requests.get(url, headers=headers).text
-    # print(repsonse_text)
-    tree = etree.HTML(repsonse_text)
-    # unit_divs = tree.xpath('//section[@class="list"]/div[@class="property"]')
-    # article_url = tree.xpath('//ul[@class="articles_21QaM"]/li[18]//a/@href')
-    article_lis = tree.xpath('//ul[@class="articles_21QaM"]/li//div[@class="info_14tJb"]')
-    # print(article_lis)
-    # return f'https://xuangubao.cn'
-    for article in article_lis:
-        span_text=article.xpath('./span/text()')[0]
-        a_url=article.xpath('./a/@href')[0]
-        if span_text.startswith('公告精选一天两发'):
-            f'https://xuangubao.cn{a_url}'
-            print(span_text,f'https://xuangubao.cn{a_url}')
-            return f'https://xuangubao.cn{a_url}'
+    repsonse_json = requests.get(url, headers=headers).json()
+    id = repsonse_json['data']["messages"][0]["id"]
+    url_id=f'https://xuangubao.cn/article/{id}'
+    print(url_id)
+    return url_id
     pass
 def get_access_token():
     # 获取access token的url
@@ -210,6 +198,4 @@ def xuangubao_report(this_city):
 
 if __name__ == '__main__':
     # weather_report("淄博")
-    # weather_report("嘉兴")
-    # get_xugubao()
     xuangubao_report('嘉兴')
